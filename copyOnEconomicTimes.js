@@ -5,7 +5,7 @@
 // @description  enter something useful
 // @match      http://economictimes.indiatimes.com/*
 // @copyright  2012+, You
-// @require    file:///
+// @require    https://raw.githubusercontent.com/manish-h/BrowserScripts/master/common.js
 // ==/UserScript==
 
 
