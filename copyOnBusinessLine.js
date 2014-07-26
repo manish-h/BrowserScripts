@@ -16,8 +16,25 @@ function getNewsArticle() {
         content += " " + $(this).text();
     }
                    );
-    var date = $("div[class*=article-dateline]").text().trim();
-    var source = "Source - BusinessLine";
+    var date = extractDate();
+    var source = "Source - Business Line";
     var newsArticle = new NewsArticle(headLine,content,"#hcenter",source,date,"#article-block");
     return newsArticle;
 }
+
+function extractDate() {
+    var dateLine = $("div[class*=article-dateline]").text().trim();
+    // dateLine is of the form "GLASGOW, JULY 26".
+    // Need to extract "July 26" from it.
+    
+    var dateRegex = /, (\w.* \d{1,2})/;
+    var dateMatch = dateRegex.exec(dateLine);
+    if (dateMatch == null) {
+        return dateLine;
+    }
+    return dateMatch[1];
+}
+
+
+
+

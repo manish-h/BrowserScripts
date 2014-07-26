@@ -16,8 +16,21 @@ function getNewsArticle() {
         content += " " + $(this).text();
     }
                    );
-    var date = $("span[class*=dateline]").text().trim();
+    var date = extractDate();
     var source = "Source - The Hindu";
     var newsArticle = new NewsArticle(headLine,content,"#hcenter",source,date,"#article-block");
     return newsArticle;
+}
+
+function extractDate() {
+    var dateLine = $("span[class*=dateline]").text().trim();
+    // dateLine is of the form "NEW DELHI, July 27, 2014"
+    // Need to extract "July 27" from it.
+    
+    var dateRegex = /(\w.*? \d{1,2}),/;
+    var dateMatch = dateRegex.exec(dateLine);
+    if(dateMatch == null) {
+        return dateLine;
+    }
+    return dateMatch[1];
 }
