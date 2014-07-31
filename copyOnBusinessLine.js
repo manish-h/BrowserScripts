@@ -18,7 +18,11 @@ function getNewsArticle() {
                    );
     var date = extractDate();
     var source = "Source - Business Line";
-    var newsArticle = new NewsArticle(headLine,content,"#hcenter",source,date,"#article-block");
+    
+    // choose the first div whose id starts with 'article-block'
+    var sourceDivId = $("[id^='article-block']").first().attr('id');
+    
+    var newsArticle = new NewsArticle(headLine,content,"#hcenter",source,date,"#" + sourceDivId);
     return newsArticle;
 }
 
@@ -34,7 +38,3 @@ function extractDate() {
     }
     return dateMatch[1];
 }
-
-
-
-
